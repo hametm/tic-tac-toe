@@ -46,14 +46,26 @@ const gameboard = (() => {
     }
 })();
 
-function takeSpace(player) {
+function takeSpace() {
+    const player1 = playerFactory("quentin", "X");
+    const player2 = playerFactory("ping", "0");
     const space = document.querySelectorAll(".space");
     let spaceArray = [];
+    let bool = true;
     space.forEach(button => {
         button.onclick = () => {
+            console.log(bool);
+            if (bool) {
+                player = player1;
+            } else {
+                player = player2;
+            }
             button.classList.add("takenSpace");
             button.textContent = player.team;
             spaceArray.push(button);
+            bool = !bool;
+            console.log(bool);
+
 
             let topRowArray = [];
             let middleRowArray = [];
@@ -92,41 +104,33 @@ function takeSpace(player) {
                     || leftColumnArray.length === 3 || middleColumnArray.length === 3 || rightColumnArray.length === 3
                     || leftDiagonalArray.length === 3 || rightDiagonalArray.length === 3) {
                     console.log("winner");
+                    
+                    space.forEach(button => {
+                        button.classList.remove("takenSpace");
+                    });
+
+                    topRowArray.length = 0;
+                    middleRowArray.length = 0;
+                    bottomRowArray.length = 0;
+                    leftColumnArray.length = 0;
+                    middleColumnArray.length = 0;
+                    rightColumnArray.length = 0;
+                    leftDiagonalArray.length = 0;
+                    rightDiagonalArray.length = 0;
+
                 }
-
-
-
-
             }
-            playGame();
         }
     });
-
-    function playGame() {
-        const space0 = document.querySelector("button.space0");
-        const space1 = document.querySelector("button.space1");
-        const space2 = document.querySelector("button.space2");
-        const space3 = document.querySelector("button.space3");
-        const space4 = document.querySelector("button.space4");
-        const space5 = document.querySelector("button.space5");
-        const space6 = document.querySelector("button.space6");
-        const space7 = document.querySelector("button.space7");
-        const space8 = document.querySelector("button.space8");
-
-        // if (space0.classList.contains("takenSpace") && space1.classList.contains("takenSpace") && space2.classList.contains("takenSpace")) {
-        //     console.log("Winner");
-        // }
-    }
 }
 
 
 
 
 const game = (() => {
-    const player1 = playerFactory("quentin", "X");
-    const player2 = playerFactory("ping", "0");
+  
     gameboard.displayBoard();
-    takeSpace(player1);
+    takeSpace();
     
     
 
