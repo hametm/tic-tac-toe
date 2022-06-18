@@ -5,7 +5,7 @@ const playerFactory = (name, team) => {
 }
 
 const gameboard = (() => {
-    const gameArray = ["0", "1", "2", "3", "4", "5", "6", "7", "8"];
+    const gameArray = ["", "", "", "", "", "", "", "", ""];
     
     return {
         displayBoard: () => {
@@ -40,33 +40,33 @@ const gameboard = (() => {
                     space.classList.add("rightDiagonal");
                 }
 
-                space.textContent = gameArray[i];
+                // space.textContent = "";
                 gameboardDisplay.appendChild(space); 
             }
         }
     }
 })();
 
-function takeSpace() {
+const game = (() => {
+  
+    gameboard.displayBoard();
+
     const player1 = playerFactory("quentin", "X");
     const player2 = playerFactory("ping", "0");
     const space = document.querySelectorAll(".space");
     let bool = true;
+    let winner;
+
     space.forEach(button => {
         button.onclick = () => {
-            if (bool) {
-                player = player1;
-            } else {
-                player = player2;
-            }
+            player = bool ? player1 : player2;
             if (player == player1) {
                 button.classList.add("takenSpace1");
             } else {
                 button.classList.add("takenSpace2");
             }
-            button.textContent = player.team;
+            // button.textContent = player.team;
             player.score.push(button);
-            console.log(player.score);
             bool = !bool;
 
 
@@ -107,10 +107,10 @@ function takeSpace() {
                     || leftColumnArray.length === 3 || middleColumnArray.length === 3 || rightColumnArray.length === 3
                     || leftDiagonalArray.length === 3 || rightDiagonalArray.length === 3) {
                     console.log("winner");
+                    winner = player;
                     
                     space.forEach(button => {
-                        button.classList.remove("takenSpace1");
-                        button.classList.remove("takenSpace2");
+                        button.disabled = true;
                     });
 
                     topRowArray.length = 0;
@@ -126,17 +126,8 @@ function takeSpace() {
             }
         }
     });
-}
 
-
-
-
-const game = (() => {
-  
-    gameboard.displayBoard();
-    takeSpace();
-    
-    
+    return winner;
 
 })();
 
