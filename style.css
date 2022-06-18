@@ -12,11 +12,19 @@ body {
 header {
     display: grid;
     place-items: center;
+    margin-top: 15px;
+    margin-bottom: 30px;
 }
 
 h1 {
     font-family: 'Henny Penny', cursive;
     font-size: 4rem;
+    margin: 0;
+}
+
+h2 {
+    margin: -10px 0px 0px 0px;
+    font-size: 1.25rem;
 }
 
 main {
@@ -24,10 +32,12 @@ main {
     width: 100%;
     display: grid;
     justify-content: center;
-    align-items: flex-start;
+    align-items: center;
 }
 
 #gameboard {
+    grid-column: 1;
+    grid-row: 1;
     height: 600px;
     width: 600px;
     padding-top: 20px;
@@ -68,6 +78,22 @@ main {
 .takenSpace2 {
     background-image: url(images/malfoy.png);
     background-size: cover;
+}
+
+.winner {
+    height: 600px;
+    width: 600px;
+    grid-column: 1;
+    grid-row: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Henny Penny', cursive;
+    font-size: 2rem;
+    color: white;
+    background-size: 80%;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 footer {

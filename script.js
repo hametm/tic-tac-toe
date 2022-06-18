@@ -122,6 +122,22 @@ const game = (() => {
                     leftDiagonalArray.length = 0;
                     rightDiagonalArray.length = 0;
 
+                    const main = document.querySelector("main");
+                    const winnerAnnouncement = document.createElement("div");
+                    winnerAnnouncement.classList.add("winner")
+                    main.appendChild(winnerAnnouncement);
+
+                    if (winner === player1) {
+                        winnerAnnouncement.textContent = "GRYFFINDOR WINS!";
+                        winnerAnnouncement.style.backgroundImage = "url(images/gryffindor-wins.jpg)";
+                    } 
+                    if (winner === player2) {
+                        winnerAnnouncement.textContent = "SLYTHERIN WINS!";
+                        winnerAnnouncement.style.backgroundImage = "url(images/slytherin-wins.png)";
+
+                    }
+
+
                 }
             }
         }
