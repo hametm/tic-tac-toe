@@ -21,6 +21,10 @@ body {
     cursor: pointer;
 }
 
-.takenSpace {
+.takenSpace1 {
     background-color: blue;
+}
+
+.takenSpace2 {
+    background-color: green;
 }

@@ -1,6 +1,7 @@
 
 const playerFactory = (name, team) => {
-    return { name, team }
+    const score = [];
+    return { name, team, score }
 }
 
 const gameboard = (() => {
@@ -50,21 +51,23 @@ function takeSpace() {
     const player1 = playerFactory("quentin", "X");
     const player2 = playerFactory("ping", "0");
     const space = document.querySelectorAll(".space");
-    let spaceArray = [];
     let bool = true;
     space.forEach(button => {
         button.onclick = () => {
-            console.log(bool);
             if (bool) {
                 player = player1;
             } else {
                 player = player2;
             }
-            button.classList.add("takenSpace");
+            if (player == player1) {
+                button.classList.add("takenSpace1");
+            } else {
+                button.classList.add("takenSpace2");
+            }
             button.textContent = player.team;
-            spaceArray.push(button);
+            player.score.push(button);
+            console.log(player.score);
             bool = !bool;
-            console.log(bool);
 
 
             let topRowArray = [];
@@ -75,30 +78,30 @@ function takeSpace() {
             let rightColumnArray = [];
             let leftDiagonalArray = [];
             let rightDiagonalArray = [];
-            for (let i = 0; i < spaceArray.length; i++) {
-                if (spaceArray[i].classList.contains("topRow")) {
-                    topRowArray.push(spaceArray[i]);
+            for (let i = 0; i < player.score.length; i++) {
+                if (player.score[i].classList.contains("topRow")) {
+                    topRowArray.push(player.score[i]);
                 }
-                if (spaceArray[i].classList.contains("middleRow")) {
-                    middleRowArray.push(spaceArray[i]);
+                if (player.score[i].classList.contains("middleRow")) {
+                    middleRowArray.push(player.score[i]);
                 }
-                if (spaceArray[i].classList.contains("bottomRow")) {
-                    bottomRowArray.push(spaceArray[i]);
+                if (player.score[i].classList.contains("bottomRow")) {
+                    bottomRowArray.push(player.score[i]);
                 }
-                if (spaceArray[i].classList.contains("leftColumn")) {
-                    leftColumnArray.push(spaceArray[i]);
+                if (player.score[i].classList.contains("leftColumn")) {
+                    leftColumnArray.push(player.score[i]);
                 }
-                if (spaceArray[i].classList.contains("middleColumn")) {
-                    middleColumnArray.push(spaceArray[i]);
+                if (player.score[i].classList.contains("middleColumn")) {
+                    middleColumnArray.push(player.score[i]);
                 }
-                if (spaceArray[i].classList.contains("rightColumn")) {
-                    rightColumnArray.push(spaceArray[i]);
+                if (player.score[i].classList.contains("rightColumn")) {
+                    rightColumnArray.push(player.score[i]);
                 }
-                if (spaceArray[i].classList.contains("leftDiagonal")) {
-                    leftDiagonalArray.push(spaceArray[i]);
+                if (player.score[i].classList.contains("leftDiagonal")) {
+                    leftDiagonalArray.push(player.score[i]);
                 }
-                if (spaceArray[i].classList.contains("rightDiagonal")) {
-                    rightDiagonalArray.push(spaceArray[i]);
+                if (player.score[i].classList.contains("rightDiagonal")) {
+                    rightDiagonalArray.push(player.score[i]);
                 }
                 if (topRowArray.length === 3 || middleRowArray.length === 3 || bottomRowArray.length === 3
                     || leftColumnArray.length === 3 || middleColumnArray.length === 3 || rightColumnArray.length === 3
@@ -106,7 +109,8 @@ function takeSpace() {
                     console.log("winner");
                     
                     space.forEach(button => {
-                        button.classList.remove("takenSpace");
+                        button.classList.remove("takenSpace1");
+                        button.classList.remove("takenSpace2");
                     });
 
                     topRowArray.length = 0;
