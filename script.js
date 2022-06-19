@@ -106,6 +106,7 @@ const game = (() => {
                 rightDiagonalArray.length = 0;
                 player1.score.length = 0;
                 player2.score.length = 0;
+                bool = true;
 
                 takenSpace1.forEach(button => {
                     button.classList.remove("takenSpace1");
