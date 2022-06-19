@@ -54,8 +54,22 @@ const game = (() => {
     const player1 = playerFactory("quentin", "X");
     const player2 = playerFactory("ping", "0");
     const space = document.querySelectorAll(".space");
+    const harrySpace = document.querySelector(".space7");
+    harrySpace.classList.add("harrySpace");
     let bool = true;
     let winner;
+
+    harrySpace.addEventListener('mouseover', () => {
+        harrySpace.textContent = "You wish.";
+    });
+
+    harrySpace.addEventListener('mouseout', () => {
+        harrySpace.textContent = "";
+    });
+
+    harrySpace.addEventListener('click', () => {
+        harrySpace.textContent = "";
+    });
 
     space.forEach(button => {
         button.onclick = () => {
@@ -69,7 +83,6 @@ const game = (() => {
             player.score.push(button);
             bool = !bool;
 
-
             let topRowArray = [];
             let middleRowArray = [];
             let bottomRowArray = [];
@@ -78,6 +91,34 @@ const game = (() => {
             let rightColumnArray = [];
             let leftDiagonalArray = [];
             let rightDiagonalArray = [];
+
+            function resetGame(announcement) {
+                const takenSpace1 = document.querySelectorAll(".takenSpace1");
+                const takenSpace2 = document.querySelectorAll(".takenSpace2");
+                topRowArray.length = 0;
+                middleRowArray.length = 0;
+                bottomRowArray.length = 0;
+                leftColumnArray.length = 0;
+                middleColumnArray.length = 0;
+                rightColumnArray.length = 0;
+                leftDiagonalArray.length = 0;
+                rightDiagonalArray.length = 0;
+
+                takenSpace1.forEach(button => {
+                    button.classList.remove("takenSpace1");
+                })
+
+                takenSpace2.forEach(button => {
+                    button.classList.remove("takenSpace2");
+                })
+
+                space.forEach(button => {
+                    button.disabled = false;
+                });
+        
+                announcement.remove();
+            }
+
             for (let i = 0; i < player.score.length; i++) {
                 if (player.score[i].classList.contains("topRow")) {
                     topRowArray.push(player.score[i]);
@@ -113,29 +154,32 @@ const game = (() => {
                         button.disabled = true;
                     });
 
-                    topRowArray.length = 0;
-                    middleRowArray.length = 0;
-                    bottomRowArray.length = 0;
-                    leftColumnArray.length = 0;
-                    middleColumnArray.length = 0;
-                    rightColumnArray.length = 0;
-                    leftDiagonalArray.length = 0;
-                    rightDiagonalArray.length = 0;
-
                     const main = document.querySelector("main");
                     const winnerAnnouncement = document.createElement("div");
+                    const gryffindorText = document.createElement("h3");
+                    gryffindorText.textContent = "GRYFFINDOR WINS!";
+                    const slytherinText = document.createElement("h3");
+                    slytherinText.textContent = "SLYTHERIN WINS!";
+                    const playAgain = document.createElement("button");
+                    playAgain.classList.add("playAgainButton");
+                    playAgain.textContent = "Play Again";
                     winnerAnnouncement.classList.add("winner")
                     main.appendChild(winnerAnnouncement);
 
                     if (winner === player1) {
-                        winnerAnnouncement.textContent = "GRYFFINDOR WINS!";
+                        winnerAnnouncement.appendChild(gryffindorText);
                         winnerAnnouncement.style.backgroundImage = "url(images/gryffindor-wins.jpg)";
                     } 
                     if (winner === player2) {
-                        winnerAnnouncement.textContent = "SLYTHERIN WINS!";
+                        winnerAnnouncement.appendChild(slytherinText);
                         winnerAnnouncement.style.backgroundImage = "url(images/slytherin-wins.png)";
-
                     }
+
+                    winnerAnnouncement.appendChild(playAgain);
+
+                    playAgain.addEventListener('click', () => {
+                        resetGame(winnerAnnouncement);
+                    });
 
 
                 }
