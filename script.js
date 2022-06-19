@@ -95,6 +95,7 @@ const game = (() => {
             function resetGame(announcement) {
                 const takenSpace1 = document.querySelectorAll(".takenSpace1");
                 const takenSpace2 = document.querySelectorAll(".takenSpace2");
+
                 topRowArray.length = 0;
                 middleRowArray.length = 0;
                 bottomRowArray.length = 0;
@@ -103,6 +104,8 @@ const game = (() => {
                 rightColumnArray.length = 0;
                 leftDiagonalArray.length = 0;
                 rightDiagonalArray.length = 0;
+                player1.score.length = 0;
+                player2.score.length = 0;
 
                 takenSpace1.forEach(button => {
                     button.classList.remove("takenSpace1");
