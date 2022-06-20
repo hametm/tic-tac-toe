@@ -38,10 +38,26 @@ h3 {
 }
 
 main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+    margin-top: 20px;
+}
+
+#turn {
+    font-size: 1.5rem;
+}
+
+.hidden {
+    visibility: hidden;
+}
+
+#gameboardContainer {
     display: grid;
     justify-content: center;
     align-items: flex-start;
-    flex-grow: 1;
 }
 
 #gameboard {

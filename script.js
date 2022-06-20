@@ -52,6 +52,7 @@ const game = (() => {
     const player1 = playerFactory("quentin", "X");
     const player2 = playerFactory("ping", "0");
     const space = document.querySelectorAll(".space");
+    const header = document.getElementById("turn");
     let bool = true;
     let winner;
 
@@ -81,6 +82,16 @@ const game = (() => {
         }
         player.score.push(button);
         bool = !bool;
+
+    }
+
+    function setHeader() {
+        if (player === player1) {
+            header.textContent = "Turn: Team Slytherin";
+        }
+        if (player === player2) {
+            header.textContent = "Turn: Team Gryffindor";
+        }
     }
 
     function resetSpaces(space1, space2) {
@@ -95,12 +106,15 @@ const game = (() => {
         space.forEach(button => {
             button.disabled = false;
         });
+
+        header.textContent = "Turn: Team Gryffindor";
     }
 
     function disableBoard() {
         space.forEach(button => {
             button.disabled = true;
         });
+        header.classList.add("hidden");
     }
 
     setHarrySpace();
@@ -109,6 +123,7 @@ const game = (() => {
         button.onclick = () => {
 
             setPlayer(button);
+            setHeader();
 
             let topRow = [];
             let middleRow = [];
@@ -137,10 +152,11 @@ const game = (() => {
 
                 resetSpaces(takenSpace1, takenSpace2);
                 announcement.remove();
+                header.classList.remove("hidden");
             }
 
             function displayWinner() {
-                const main = document.querySelector("main");
+                const container = document.querySelector("#gameboardContainer");
                 const winnerAnnouncement = document.createElement("div");
                 const gryffindorText = document.createElement("h3");
                 const slytherinText = document.createElement("h3");
@@ -175,7 +191,7 @@ const game = (() => {
 
                 setAnnouncementStyle();
                 setWinnerStyle();
-                main.appendChild(winnerAnnouncement);
+                container.appendChild(winnerAnnouncement);
                 winnerAnnouncement.appendChild(playAgain);
 
                 playAgain.addEventListener('click', () => {
