@@ -167,8 +167,9 @@ const game = (() => {
                     const playAgain = document.createElement("button");
                     playAgain.classList.add("playAgainButton");
                     playAgain.textContent = "Play Again";
-                    winnerAnnouncement.classList.add("winner")
+                    winnerAnnouncement.classList.add("winner");
                     main.appendChild(winnerAnnouncement);
+
 
                     if (winner === player1) {
                         winnerAnnouncement.appendChild(gryffindorText);

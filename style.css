@@ -89,6 +89,16 @@ main {
     background-size: cover;
 }
 
+@keyframes fadein {
+    from {
+      opacity: 0;
+    }
+  
+    to {
+      opacity: 1;
+    }
+  }
+
 .winner {
     height: 600px;
     width: 600px;
@@ -102,6 +112,7 @@ main {
     background-repeat: no-repeat;
     background-position: center;
     margin-top: 20px;
+    animation: .5s linear fadein;
 }
 
 .harrySpace {
