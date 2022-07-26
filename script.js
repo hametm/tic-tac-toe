@@ -15,30 +15,15 @@ const gameboard = (() => {
                 space.classList.add("space");
                 space.classList.add(`space${i}`);
 
-                if (i < 3) {
-                    space.classList.add("topRow");
-                }
-                if (i === 3 || i === 4 || i === 5) {
-                    space.classList.add("middleRow");
-                }
-                if (i === 6 || i === 7 || i === 8) {
-                    space.classList.add("bottomRow");
-                }
-                if (i === 0 || i === 3 || i === 6) {
-                    space.classList.add("leftColumn");
-                }
-                if (i === 1 || i === 4 || i === 7) {
-                    space.classList.add("middleColumn");
-                }
-                if (i === 2|| i === 5 || i === 8) {
-                    space.classList.add("rightColumn");
-                }
-                if (i === 0 || i === 4 || i === 8) {
-                    space.classList.add("leftDiagonal");
-                }
-                if (i === 2 || i === 4 || i === 6) {
-                    space.classList.add("rightDiagonal");
-                }
+                if (i < 3) space.classList.add("topRow");
+                if (i === 3 || i === 4 || i === 5) space.classList.add("middleRow");
+                if (i === 6 || i === 7 || i === 8) space.classList.add("bottomRow");
+                if (i === 0 || i === 3 || i === 6) space.classList.add("leftColumn");
+                if (i === 1 || i === 4 || i === 7) space.classList.add("middleColumn");
+                if (i === 2|| i === 5 || i === 8) space.classList.add("rightColumn");
+                if (i === 0 || i === 4 || i === 8) space.classList.add("leftDiagonal");
+                if (i === 2 || i === 4 || i === 6) space.classList.add("rightDiagonal");
+
                 gameboardDisplay.appendChild(space); 
             }
         }
@@ -75,23 +60,15 @@ const game = (() => {
 
     function setPlayer(button) {
         player = bool ? player1 : player2;
-        if (player == player1) {
-            button.classList.add("takenSpace1");
-        } else {
-            button.classList.add("takenSpace2");
-        }
+        if (player === player1) button.classList.add("takenSpace1");
+        else button.classList.add("takenSpace2");
         player.score.push(button);
         bool = !bool;
-
     }
 
     function setHeader() {
-        if (player === player1) {
-            header.textContent = "Turn: Team Slytherin";
-        }
-        if (player === player2) {
-            header.textContent = "Turn: Team Gryffindor";
-        }
+        if (player === player1) header.textContent = "Turn: Team Slytherin";
+        if (player === player2) header.textContent = "Turn: Team Gryffindor";
     }
 
     function resetSpaces(space1, space2) {
@@ -201,30 +178,14 @@ const game = (() => {
 
             function setScore() {
                 for (let i = 0; i < player.score.length; i++) {
-                    if (player.score[i].classList.contains("topRow")) {
-                        topRow.push(player.score[i]);
-                    }
-                    if (player.score[i].classList.contains("middleRow")) {
-                        middleRow.push(player.score[i]);
-                    }
-                    if (player.score[i].classList.contains("bottomRow")) {
-                        bottomRow.push(player.score[i]);
-                    }
-                    if (player.score[i].classList.contains("leftColumn")) {
-                        leftColumn.push(player.score[i]);
-                    }
-                    if (player.score[i].classList.contains("middleColumn")) {
-                        middleColumn.push(player.score[i]);
-                    }
-                    if (player.score[i].classList.contains("rightColumn")) {
-                        rightColumn.push(player.score[i]);
-                    }
-                    if (player.score[i].classList.contains("leftDiagonal")) {
-                        leftDiagonal.push(player.score[i]);
-                    }
-                    if (player.score[i].classList.contains("rightDiagonal")) {
-                        rightDiagonal.push(player.score[i]);
-                    }
+                    if (player.score[i].classList.contains("topRow")) topRow.push(player.score[i]);
+                    if (player.score[i].classList.contains("middleRow")) middleRow.push(player.score[i]);
+                    if (player.score[i].classList.contains("bottomRow")) bottomRow.push(player.score[i]);
+                    if (player.score[i].classList.contains("leftColumn")) leftColumn.push(player.score[i]);
+                    if (player.score[i].classList.contains("middleColumn")) middleColumn.push(player.score[i]);
+                    if (player.score[i].classList.contains("rightColumn")) rightColumn.push(player.score[i]);
+                    if (player.score[i].classList.contains("leftDiagonal")) leftDiagonal.push(player.score[i]);
+                    if (player.score[i].classList.contains("rightDiagonal")) rightDiagonal.push(player.score[i]);
                 }
             }
    
@@ -237,13 +198,9 @@ const game = (() => {
                     || rightColumn.length === 3
                     || leftDiagonal.length === 3 
                     || rightDiagonal.length === 3) {
-
-                    console.log("winner");
-                    winner = player;
-                    
-                    disableBoard();
-                    displayWinner();
-    
+                        winner = player;
+                        disableBoard();
+                        displayWinner();
                 }
             }
 
